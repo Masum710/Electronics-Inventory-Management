@@ -1,0 +1,58 @@
+
+<div class="product-list">
+  <h1 style="text-align: center;">products Inventory</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>SKU</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Stock Level</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.name }}</td>
+        <td>{{ product.sku }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.stock }}</td>
+        <td><button class="edit-btn" (click)="onEditClick(product)">Edit</button></td>
+        <td><button class="delete-btn" (click)="onDeleteClick(product)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  <h2>Add Product</h2>
+  <form #productForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" name="name" required [(ngModel)]="product.name">
+    </div>
+    <div class="form-group">
+      <label for="sku">SKU:</label>
+      <input type="text" class="form-control" id="sku" name="sku" required [(ngModel)]="product.sku">
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" name="description" required [(ngModel)]="product.description"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input type="number" class="form-control" id="price" name="price" required [(ngModel)]="product.price">
+    </div>
+    <div class="form-group">
+      <label for="stock">Stock:</label>
+      <input type="number" class="form-control" id="stock" name="stock" required [(ngModel)]="product.stock">
+    </div>
+    <button type="submit" class="btn btn-primary" *ngIf="!edited">Add Product</button>
+    <button type="button" class="btn btn-success" *ngIf="edited" (click)="onPutSubmit()">Update Product</button>
+    <button type="button" class="btn btn-secondary" *ngIf="edited" (click)="resetEditPage()">Cancel</button>
+  </form>
+
+
+
